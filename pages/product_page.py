@@ -22,3 +22,11 @@ class ProductPage(BasePage):
                self.browser.find_element(*ProductPageLocators.PAGE_BOOK_PRICE).text, f" \
             cart price {self.browser.find_element(*ProductPageLocators.CART_BOOK_PRICE).text}, \
             book price {self.browser.find_element(*ProductPageLocators.PAGE_BOOK_PRICE).text}"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+           "Success message is presented, but should not be"
+
+    def should_disappear_success(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE),\
+            "Success message didn't disappear"
