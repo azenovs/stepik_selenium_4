@@ -7,9 +7,18 @@ class BasePageLocators:
     VIEW_BASKET = (By.CSS_SELECTOR, "span > a")
 
 
+class BasketPageLocators:
+    EMPTY_TEXT = (By.CSS_SELECTOR, "#content_inner>p")
+    LIST_OF_GOODS_HEADER = (By.CSS_SELECTOR, ".basket-title")
+
+
 class LoginPageLocators:
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+
+
+class MainPageLocators:
+    pass
 
 
 class ProductPageLocators:
