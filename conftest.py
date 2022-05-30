@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-# создаем обработчик дополнительных параметров командной строки
+# creating handler of additional command line parameters
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome",
                      help="Choose browser: chrome or firefox")
@@ -11,7 +11,7 @@ def pytest_addoption(parser):
                      help="Choose language (en, es, fr, etc.)")
 
 
-# запуск браузера с параметрами, указанными пользователем
+# launching browser with user-defined parameters
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")

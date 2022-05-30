@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from pages.locators import BasePageLocators
+from .locators import BasePageLocators
 import math
 
 
@@ -13,13 +13,12 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    # switching to login page
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
-        # вдруг нам нужно стало бы обработать alert
-        # alert = self.browser.switch_to.alert
-        # alert.accept()
 
+    # checking if certain element disappears
     def is_disappeared(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).\
@@ -28,6 +27,7 @@ class BasePage:
             return False
         return True
 
+    # checking if certain element is present
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
@@ -35,6 +35,7 @@ class BasePage:
             return False
         return True
 
+    # checking if certain element is absent
     def is_not_element_present(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located((how, what)))
@@ -42,20 +43,25 @@ class BasePage:
             return True
         return False
 
+    # opening urls
     def open(self):
         self.browser.get(self.url)
 
+    # checking if user is logged in
     def should_be_authorized_user(self):
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                      " probably unauthorised user"
 
+    # checking if login button is visible
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
+    # switching to basket
     def should_be_view_cart(self):
         cart_button = self.browser.find_element(*BasePageLocators.VIEW_BASKET)
         cart_button.click()
 
+    # CAPTCHA handling
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

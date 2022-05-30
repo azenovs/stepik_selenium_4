@@ -22,10 +22,6 @@ class LoginPageLocators:
     CONF_REGISTRATION = (By.CSS_SELECTOR, "[name=registration_submit]")
 
 
-class MainPageLocators:
-    pass
-
-
 class ProductPageLocators:
     ADD_TO_CART = (By.CSS_SELECTOR, ".btn-add-to-basket")
     CART_BOOK_NAME = (By.CSS_SELECTOR, ".alertinner > strong")
